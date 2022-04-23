@@ -8,7 +8,6 @@ class Todos extends StatefulWidget {
   static const String routeName = '/todos';
 
   final String title;
-
   @override
   State<Todos> createState() => _TodosState();
 }
@@ -69,3 +68,4 @@ class _TodosState extends State<Todos> {
     );
   }
 }
+

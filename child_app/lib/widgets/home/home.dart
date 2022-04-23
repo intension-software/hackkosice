@@ -1,8 +1,8 @@
 import 'package:child_app/widgets/content/content.dart';
+import 'package:child_app/widgets/home/MoneyWidget.dart';
 import 'package:flutter/material.dart';
 
-import '../todos/todos.dart';
-import '../balance/balance.dart';
+import '../../util/AppColors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -15,44 +15,57 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          children: const <Widget>[
-            HomeCard(
-                title: "💰 Balance 💰",
-                routeName: Todos.routeName,
-                content: PiggyBank(
-                  money: 100,
-                  coins: 10,
-                )),
-            HomeCard(
-                title: "✅ Missions ✅",
-                routeName: Todos.routeName,
-                content: ThumbnailContent(title: "Lóve")),
-            HomeCard(
-                title: "👨‍👩‍👧‍👦 Close people 👨‍👩‍👧‍👦",
-                routeName: Todos.routeName,
-                content: ThumbnailContent(title: "Lóve")),
-          ],
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            shadowColor: Colors.transparent,
+            foregroundColor: Colors.black,
+            bottom: TabBar(
+              labelColor: AppColors.grey,
+              indicatorColor: AppColors.grey,
+              tabs: [
+                Tab(text: 'Money'),
+                Tab(text: 'Piggy Bank'),
+              ],
+            ),
+            title: Text(widget.title,
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Inter',
+                    color: AppColors.grey)),
+            actions: [
+              Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child:
+                  Align(
+                    child:
+                    Icon(Icons.notifications_none_outlined, color: AppColors.grey),
+                  ))
+            ],
+            backgroundColor: Colors.white,
+
+          ),
+          body: TabBarView(
+            children: [
+              MoneyWidget(),
+              Center(
+                child: Text('Tab 2'),
+              ),
+            ],
+          ),
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
+
+
 
 class HomeCard extends StatelessWidget {
   const HomeCard(

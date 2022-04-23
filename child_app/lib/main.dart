@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/home',
       routes: <String, WidgetBuilder> {
-        HomePage.routeName: (BuildContext context) => const HomePage(title: 'Tatra banka'),
+        HomePage.routeName: (BuildContext context) => const HomePage(title: 'Hey there!'),
         Todos.routeName: (BuildContext context) => const Todos(title: 'Missions'),
       },
     );
