@@ -1,9 +1,11 @@
+import 'package:child_app/widgets/todos/missionsWidget.dart';
 import 'package:flutter/material.dart';
+
+import '../../util/AppColors.dart';
 
 class Todos extends StatefulWidget {
   const Todos({Key? key, required this.title}) : super(key: key);
   static const String routeName = '/todos';
-
 
   final String title;
 
@@ -12,7 +14,7 @@ class Todos extends StatefulWidget {
 }
 
 class _TodosState extends State<Todos> {
-  int _counter = 0;
+  int _counter = 10;
 
   void _incrementCounter() {
     setState(() {
@@ -22,16 +24,52 @@ class _TodosState extends State<Todos> {
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            foregroundColor: Colors.black,
+            bottom: TabBar(
+              labelColor: AppColors.grey,
+              indicatorColor: AppColors.grey,
+              tabs: [
+                Tab(text: 'Tasks'),
+                Tab(text: 'History'),
+              ],
+            ),
+            title: Text(widget.title,
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Inter',
+                    color: AppColors.grey)),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Color(0xFFa1a1a1)),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            actions: [
+              Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child:
+                  Align(
+                    child:
+                    Image.asset("assets/logo_grey.png", height: 50, width: 50),
+                  ))],
+            backgroundColor: Colors.white,
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-          ],
+          ),
+          body: TabBarView(
+            children: [
+              MissionsWidget(),
+              Center(
+                child: Text('Tab 2'),
+              ),
+            ],
+          ),
         ),
       ),
     );
