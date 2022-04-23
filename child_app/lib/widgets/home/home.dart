@@ -55,7 +55,7 @@ class HomeCard extends StatelessWidget {
     child: Container(
       width: double.infinity,
       child: Card(
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
           color: Colors.grey,
           child: Container(
               padding: EdgeInsets.all(20),
