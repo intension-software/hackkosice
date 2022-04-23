@@ -12,10 +12,10 @@ class Loading extends StatefulWidget {
   static final String routeName = '/loading';
 
   @override
-  _LoadingState createState() => _LoadingState();
+  LoadingState createState() => LoadingState();
 }
 
-class _LoadingState extends State<Loading> {
+class LoadingState extends State<Loading> {
   static const String apiUrl = "http://192.168.185.38:5000/api/v1";
   bool finished = false;
   static late User user;

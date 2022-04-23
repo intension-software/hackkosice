@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../util/AppColors.dart';
+import '../Loading/Loading.dart';
 import '../todos/todos.dart';
 
 class MoneyWidget extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MoneyWidgetState extends State<MoneyWidget> {
       body: Container(
         child: Column(
           children: [
-            BalanceCard("\$1,000.00"),
+            BalanceCard("\$" + LoadingState.user.balance.toString()),
             SizedBox(height: 20),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
