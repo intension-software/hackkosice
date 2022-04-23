@@ -14,13 +14,6 @@ class Todos extends StatefulWidget {
 }
 
 class _TodosState extends State<Todos> {
-  int _counter = 10;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +22,7 @@ class _TodosState extends State<Todos> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            shadowColor: Colors.transparent,
             foregroundColor: Colors.black,
             bottom: TabBar(
               labelColor: AppColors.grey,
@@ -40,7 +34,7 @@ class _TodosState extends State<Todos> {
             ),
             title: Text(widget.title,
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Inter',
                     color: AppColors.grey)),
