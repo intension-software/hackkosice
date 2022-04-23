@@ -5,15 +5,11 @@ import helmet from 'helmet'
 import cors from 'cors'
 
 import dotenv from 'dotenv'
-import database from './config/database'
 
 import middlewares from './middlewares'
 import routes from './routes'
 
-import './passport'
-
 dotenv.config()
-database.connect()
 
 const app = express()
 

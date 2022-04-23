@@ -1,9 +1,8 @@
 import express from 'express'
 
 import AuthenticationController from '../controllers/AuthenticationController'
-
-import AuthenticationControllerPolicy from '../policies/AuthenticationControllerPolicy'
-import isAuthenticated from '../policies/isAuthenticated'
+import MissionController from '../controllers/MissionController'
+import QuizController from '../controllers/QuizController'
 
 const router = express.Router()
 
@@ -14,15 +13,43 @@ router.get('/', (req, res) => {
   })
 })
 
+// User
 router.post('/register',
-  AuthenticationControllerPolicy.register,
   AuthenticationController.register)
 
 router.post('/login',
   AuthenticationController.login)
 
-router.post('/changePassword',
-  isAuthenticated,
-  AuthenticationController.changePassword)
+router.get('/user/info',
+  AuthenticationController.getUserInfo)
+
+// Mission
+router.get('/mission/:id',
+  MissionController.getMission)
+
+router.post('/mission',
+  MissionController.postMission)
+
+router.patch('/mission/:id',
+  MissionController.updateMission)
+
+router.patch('/mission/:id/complete',
+  MissionController.markMissionAsCompleted)
+
+router.patch('/mission/:id/approve',
+  MissionController.markMissionAsApproved)
+
+router.patch('/mission/:id/claim',
+  MissionController.claimMissions)
+
+router.delete('/mission/:id',
+  MissionController.deleteMission)
+
+// Quiz
+router.get('/quizzes',
+  QuizController.getAllQuestions)
+
+router.get('/quiz/:id',
+  QuizController.getQuestion)
 
 export default router

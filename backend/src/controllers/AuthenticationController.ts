@@ -1,87 +1,54 @@
-import User from '../models/User'
-import jwt from 'jsonwebtoken'
-import config from '../config/config'
 import { Request, Response } from 'express'
-
-function signToken (user: typeof User) {
-  const ONE_WEEK = 60 * 60 * 24 * 7
-  return jwt.sign(user, config.authentication.jwtSecret, {
-    expiresIn: ONE_WEEK
-  })
-}
+import { users } from '../models/User'
 
 export default {
   async register (req: Request, res: Response) {
     try {
-      const user = await User.create(req.body)
-      const savedUser = await user.save()
-
+      const user = await users.push(req.body)
       res.status(201).json({
-        userId: savedUser.id
+        message: 'User created successfully',
+        user
       })
     } catch (error) {
       res.status(400).send({
-        error: 'Cannot create user'
+        error: 'Cannot register user'
       })
     }
   },
   async login (req: Request, res: Response) {
     try {
-      const { email, password } = req.body
-      const user = await User.findOne({ email })
+      const user = users.find((user) => user.email === req.body.email)
 
       if (!user) {
-        return res.status(403).send({
-          error: 'The login information was incorrect'
+        return res.status(400).send({
+          error: 'User does not exist'
         })
       }
 
-      const isPasswordValid = await user.comparePassword(password)
-      if (!isPasswordValid) {
-        return res.status(403).send({
-          error: 'The login information was incorrect'
+      if (user.password !== req.body.password) {
+        return res.status(400).send({
+          error: 'Password is incorrect'
         })
       }
 
-      const userJson = user.toJSON()
-      delete userJson.password
-      res.send({
-        user: userJson,
-        token: signToken(userJson)
+      res.status(200).json({
+        message: 'User logged in successfully',
+        user
       })
     } catch (error) {
-      res.status(500).send({
-        error: 'An error has occured trying to login'
+      res.status(400).send({
+        error: 'Cannot login'
       })
     }
   },
-  async changePassword (req: Request, res: Response) {
+  async getUserInfo (req: Request, res: Response) {
     try {
-      const { oldPassword, newPassword } = req.body
-      const user = await User.findById(req.user)
-
-      if (!user) {
-        return res.status(403).send({
-          error: 'The login information was incorrect'
-        })
-      }
-
-      const isPasswordValid = await user.comparePassword(oldPassword)
-      if (!isPasswordValid) {
-        return res.status(403).send({
-          error: 'The login information was incorrect'
-        })
-      }
-
-      user.password = newPassword
-      await user.save()
-
-      res.send({
-        message: 'Password changed successfully'
-      })
+      const user = users.find((user) => user.id === req.body.id)
+      res.status(200).json(user)
     } catch (error) {
-      res.status(500).send({
-        error: 'An error has occured trying to change password'
+      res.status(500).json({
+        message: 'Cannot get info',
+        error
       })
     }
   }

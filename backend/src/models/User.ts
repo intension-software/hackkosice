@@ -1,31 +1,14 @@
-import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
-
-async function hashPassword () {
-  const user = this
-  const SALT_FACTOR = 8
-
-  if (!user.isModified('password')) {
-    return
-  }
-
-  return bcrypt
-    .genSalt(SALT_FACTOR)
-    .then(salt => bcrypt.hash(user.password, salt))
-    .then(hash => {
-      user.password = hash
-    })
+export interface User {
+  id: number
+  email: string
+  password: string
+  firstName: string
+  isAdult: boolean
+  toClaim: number
+  balance: number
 }
 
-const User = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
-}, { timestamps: true })
-
-User.methods.comparePassword = function (password: string) {
-  return bcrypt.compare(password, this.password)
-}
-
-User.pre('save', hashPassword)
-
-export default mongoose.model('User', User)
+export const users: User[] = [
+  { id: 0, email: 'parent@example.com', password: 'test', firstName: 'Parent', isAdult: true, toClaim: 0, balance: 1100.35 },
+  { id: 1, email: 'child@example.com', password: 'test', firstName: 'Child', isAdult: false, toClaim: 0, balance: 3.44 }
+]
