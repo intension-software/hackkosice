@@ -43,7 +43,7 @@ export default {
   },
   async getUserInfo (req: Request, res: Response) {
     try {
-      const user = users.find((user) => user.id === req.body.id)
+      const user = users.find((user) => user.id.toString() === req.params.id)
       res.status(200).json(user)
     } catch (error) {
       res.status(500).json({

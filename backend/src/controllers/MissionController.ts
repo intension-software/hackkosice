@@ -98,7 +98,9 @@ export default {
 
       missions[missionIndex].state = 'approved'
 
-      const userIndex = await users.findIndex((user) => user.id.toString() === req.body.userId)
+      console.log(req.body.id)
+      console.log(users)
+      const userIndex = await users.findIndex((user) => user.id === req.body.id)
 
       if (userIndex === -1) {
         return res.status(400).send({
@@ -120,7 +122,7 @@ export default {
   },
   async claimMissions (req: Request, res: Response) {
     try {
-      const userIndex = await users.findIndex((user) => user.id.toString() === req.body.userId)
+      const userIndex = await users.findIndex((user) => user.id.toString() === req.params.userId)
 
       if (userIndex === -1) {
         return res.status(400).send({

@@ -20,10 +20,13 @@ router.post('/register',
 router.post('/login',
   AuthenticationController.login)
 
-router.get('/user/info',
+router.get('/user/:id',
   AuthenticationController.getUserInfo)
 
 // Mission
+router.get('/missions',
+  MissionController.getAllMissions)
+
 router.get('/mission/:id',
   MissionController.getMission)
 
@@ -39,7 +42,7 @@ router.patch('/mission/:id/complete',
 router.patch('/mission/:id/approve',
   MissionController.markMissionAsApproved)
 
-router.patch('/mission/:id/claim',
+router.patch('/mission/claim/:userId',
   MissionController.claimMissions)
 
 router.delete('/mission/:id',
