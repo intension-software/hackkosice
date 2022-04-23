@@ -23,31 +23,8 @@ class _MoneyWidgetState extends State<MoneyWidget> {
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.only(left: 20, top: 15, bottom: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                minimumSize: Size.fromHeight(40),
-                backgroundColor: AppColors.blue,
-                ),
-
-              child: Align(
-                alignment: Alignment.centerLeft,
-                  child:Text("Missions",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20))),
-              onPressed: () {
-                Navigator.pushNamed(context, Todos.routeName);
-              },
-            )),
-            SizedBox(height: 20),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextButton(
                   style: TextButton.styleFrom(
-                    padding: EdgeInsets.only(left: 20, top: 15, bottom: 15),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -55,12 +32,48 @@ class _MoneyWidgetState extends State<MoneyWidget> {
                     backgroundColor: AppColors.blue,
                   ),
 
-                  child: Align(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child:Text("Missions",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20))),
+                        Icon(Icons.arrow_forward_ios, color: Colors.white, size: 20)]),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                        builder: (context) => new Todos(title: 'Missions',),
+                      ),
+                    );
+                  },
+                )),
+            SizedBox(height: 20),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    minimumSize: Size.fromHeight(40),
+                    backgroundColor: AppColors.blue,
+                  ),
+
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                    Align(
                       alignment: Alignment.centerLeft,
                       child:Text("Quiz",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20))),
+                      Icon(Icons.arrow_forward_ios, color: Colors.white, size: 20)]),
                   onPressed: () {
                   },
                 )),
