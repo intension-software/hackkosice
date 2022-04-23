@@ -1,3 +1,4 @@
+import 'package:child_app/widgets/Loading/Loading.dart';
 import 'package:child_app/widgets/home/home.dart';
 import 'package:child_app/widgets/todos/todos.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +32,11 @@ class MyApp extends StatelessWidget {
             button: const TextStyle(color: Colors.lightBlue),
         ),
       ),
-      initialRoute: '/home',
+      initialRoute: '/loading',
       routes: <String, WidgetBuilder> {
         HomePage.routeName: (BuildContext context) => const HomePage(title: 'Hey there!'),
         Todos.routeName: (BuildContext context) => const Todos(title: 'Missions'),
+        Loading.routeName: (BuildContext context) =>  Loading(),
       },
     );
   }

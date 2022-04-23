@@ -47,7 +47,7 @@ class _MissionsWidgetState extends State<MissionsWidget> {
                                 child: Icon(
                                   Icons.check_rounded,
                                   color: Colors.white54,
-                                  size: 50,
+                                  size: 35,
                                 ),
                               ),
                               alignment: Alignment.centerRight,
