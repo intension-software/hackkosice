@@ -1,5 +1,6 @@
 import 'package:child_app/widgets/content/content.dart';
 import 'package:child_app/widgets/home/MoneyWidget.dart';
+import 'package:child_app/widgets/home/userIcon.dart';
 import 'package:flutter/material.dart';
 
 import '../../util/AppColors.dart';
@@ -45,7 +46,15 @@ class _HomePageState extends State<HomePage> {
                   child:
                   Align(
                     child:
-                    Icon(Icons.notifications_none_outlined, color: AppColors.grey),
+                    Icon(Icons.notifications_none_outlined,
+                        color: AppColors.grey),
+                  )),
+              Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child:
+                  Align(
+                    child:
+                    userIcon(),
                   ))
             ],
             backgroundColor: Colors.white,

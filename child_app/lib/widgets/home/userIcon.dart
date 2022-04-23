@@ -10,10 +10,11 @@ Widget userIcon() {
       ),
       child: 
         const Padding(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(5),
           child: Icon(
-          Icons.person_outlined,
-          size: 30,
+            Icons.person_outlined,
+            color: Colors.white,
+          size: 28,
         ),
     ),
   ),
