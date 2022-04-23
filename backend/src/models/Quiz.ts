@@ -20,17 +20,17 @@ export const quizzes: Quiz[] = [
       },
       {
         id: 1,
-        text: 'SLSP',
+        text: 'SuperBank',
         correct: false
       },
       {
         id: 2,
-        text: 'VUB',
+        text: 'NotTatraBanka',
         correct: false
       },
       {
         id: 3,
-        text: 'MBank',
+        text: 'PishkotkiBank',
         correct: false
       }
     ]
