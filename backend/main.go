@@ -1,14 +1,10 @@
 package main
 
 import (
-	"tatrabanka/backend/controllers"
-
-	"github.com/gin-gonic/gin"
+	"tatrabanka/backend/routes"
 )
 
 func main() {
-	router := gin.Default()
-	router.GET("/albums", controllers.GetAlbums)
-
-	router.Run("localhost:8080")
+	router := routes.InitRoutes()
+	router.Run(":8080")
 }
