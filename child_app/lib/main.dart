@@ -1,4 +1,5 @@
 import 'package:child_app/widgets/home/home.dart';
+import 'package:child_app/widgets/todos/todos.dart';
 import 'package:flutter/material.dart';
 
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.grey,
-        canvasColor: Colors.black12,
+        canvasColor: Colors.white10,
         textTheme: ThemeData.dark().textTheme.copyWith(
             button: const TextStyle(color: Colors.lightBlue),
         ),
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/home',
       routes: <String, WidgetBuilder> {
         HomePage.routeName: (BuildContext context) => const HomePage(title: 'Tatra banka'),
+        Todos.routeName: (BuildContext context) => const Todos(title: 'Todos'),
       },
     );
   }

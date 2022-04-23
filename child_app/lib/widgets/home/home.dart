@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../todos/todos.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
   static const String routeName = '/home';
@@ -31,18 +33,23 @@ class _HomePageState extends State<HomePage> {
         child: Column(
 
           children: <Widget>[
-            Card(
-              child: Column(
-                children: [
-                  Text('You have pushed the button this many times:'),
-                  Text(
-                    '$_counter',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, Todos.routeName);
+              },
+              child: Card(
+                color: Colors.grey,
+                child: Column(
+                  children: [
+                    Text('You have pushed the button this many times:'),
+                    Text(
+                      '$_counter',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ],
 
               )
-            ),
+            ))
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
