@@ -20,7 +20,7 @@ class _MoneyWidgetState extends State<MoneyWidget> {
       body: Container(
         child: Column(
           children: [
-            BalanceCard("\$" + LoadingState.user.balance.toString()),
+            BalanceCard(LoadingState.user.balance.toString() + "\$"),
             SizedBox(height: 20),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -108,11 +108,14 @@ Widget BalanceCard(String balance) {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(balance,
+          Row(children: [Image.asset("assets/money.png", width: 30, height: 30,),
+            SizedBox(width: 5),
+            Text(balance,
             style: TextStyle(
                 color: AppColors.grey,
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold),
+          )],
           ),
           SizedBox(height: 5),
           Text("Dollars"),

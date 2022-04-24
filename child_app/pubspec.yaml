@@ -59,6 +59,7 @@ flutter:
     - assets/logo_grey.png
     - assets/piggy_bank_page.png
     - assets/money_emoji.png
+    - assets/money.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

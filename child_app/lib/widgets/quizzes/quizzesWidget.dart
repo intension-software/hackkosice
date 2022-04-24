@@ -62,47 +62,14 @@ class _QuizzesWidgetState extends State<QuizzesWidget> {
           body: TabBarView(
             children: [
               Scaffold(
-                  body: Container(
-                      margin: EdgeInsets.only(top: 10,right: 15,left: 15),
-                      child: Column(
-                        children: <Widget>[
-                          Expanded(
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              itemCount: quizzes.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      Color(0xff8F00FF),
-                                      Color(0xff458FFF),
-                                            ],
-                                          ),
-                                        ),
-                                  child: 
-                                  const Padding(padding: EdgeInsets.only(top: 10,bottom: 10),
-                                  child: Text(
-                                    "Daily Quiz",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  ),
-                                  ),
-                                  // child: ListTile(
-                                  //   title: Text(quizzes.keys.elementAt(index)),
-                                  //   subtitle: Text(quizzes.values.elementAt(index).join(", ")),
-                                  // ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ))),
+                  body: ListView.builder(
+                      itemCount: quizzes.keys.length,
+                      itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(quizzes.keys.elementAt(index)),
+                      subtitle: Text(quizzes.values.elementAt(index).join(', ')),
+                    );
+                  })),
               Center(
                 child: Text('Tab 2'),
               ),

@@ -11,7 +11,6 @@ class MissionsWidget extends StatefulWidget {
 }
 
 class _MissionsWidgetState extends State<MissionsWidget> {
-  int _counter = 10;
   var missions = LoadingState.missions;
 
   @override
