@@ -1,4 +1,5 @@
 import 'package:child_app/widgets/home/home.dart';
+import 'package:child_app/widgets/quizzes/quizzesWidget.dart';
 import 'package:child_app/widgets/todos/todos.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder> {
         HomePage.routeName: (BuildContext context) => const HomePage(title: 'Hey there!'),
         Todos.routeName: (BuildContext context) => const Todos(title: 'Missions'),
+        QuizzesWidget.routeName: (BuildContext context) => QuizzesWidget(title: 'Quizzes',),
       },
     );
   }

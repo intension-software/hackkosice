@@ -1,3 +1,4 @@
+import 'package:child_app/widgets/quizzes/quizzesWidget.dart';
 import 'package:flutter/material.dart';
 
 import '../../util/AppColors.dart';
@@ -75,6 +76,12 @@ class _MoneyWidgetState extends State<MoneyWidget> {
                               fontSize: 20))),
                       Icon(Icons.arrow_forward_ios, color: Colors.white, size: 20)]),
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                        builder: (context) => new QuizzesWidget(title : 'Quizzes'),
+                      ),
+                    );
                   },
                 )),
           ],
