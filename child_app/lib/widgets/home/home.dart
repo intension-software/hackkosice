@@ -1,5 +1,6 @@
 import 'package:child_app/widgets/content/content.dart';
 import 'package:child_app/widgets/home/MoneyWidget.dart';
+import 'package:child_app/widgets/home/PiggyBank.dart';
 import 'package:child_app/widgets/home/userIcon.dart';
 import 'package:flutter/material.dart';
 
@@ -30,8 +31,12 @@ class _HomePageState extends State<HomePage> {
               labelColor: AppColors.grey,
               indicatorColor: AppColors.grey,
               tabs: [
-                Tab(text: 'Money'),
-                Tab(text: 'Piggy Bank'),
+                Tab(child: Container(
+                    margin: EdgeInsets.all(5),
+                    child: Image.asset("assets/money_emoji.png", ))),
+                Tab(child: Container(
+                    margin: EdgeInsets.all(5),
+                    child: Image.asset("assets/piggy_bank_page.png", ))),
               ],
             ),
             title: Text(widget.title,
@@ -63,9 +68,7 @@ class _HomePageState extends State<HomePage> {
           body: TabBarView(
             children: [
               MoneyWidget(),
-              Center(
-                child: Text('Tab 2'),
-              ),
+              PiggyBank(),
             ],
           ),
         ),

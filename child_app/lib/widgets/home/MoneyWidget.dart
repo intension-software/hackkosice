@@ -1,6 +1,8 @@
+import 'package:child_app/widgets/quizzes/quizzesWidget.dart';
 import 'package:flutter/material.dart';
 
 import '../../util/AppColors.dart';
+import '../Loading/Loading.dart';
 import '../todos/todos.dart';
 
 class MoneyWidget extends StatefulWidget {
@@ -18,7 +20,7 @@ class _MoneyWidgetState extends State<MoneyWidget> {
       body: Container(
         child: Column(
           children: [
-            BalanceCard("\$1,000.00"),
+            BalanceCard(LoadingState.user.balance.toString() + "\$"),
             SizedBox(height: 20),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -75,6 +77,12 @@ class _MoneyWidgetState extends State<MoneyWidget> {
                               fontSize: 20))),
                       Icon(Icons.arrow_forward_ios, color: Colors.white, size: 20)]),
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                        builder: (context) => new QuizzesWidget(title : 'Quizzes'),
+                      ),
+                    );
                   },
                 )),
           ],
@@ -100,11 +108,14 @@ Widget BalanceCard(String balance) {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(balance,
+          Row(children: [Image.asset("assets/money.png", width: 30, height: 30,),
+            SizedBox(width: 5),
+            Text(balance,
             style: TextStyle(
                 color: AppColors.grey,
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold),
+          )],
           ),
           SizedBox(height: 5),
           Text("Dollars"),
