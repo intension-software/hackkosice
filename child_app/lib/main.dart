@@ -1,7 +1,8 @@
+import 'package:child_app/widgets/Loading/Loading.dart';
 import 'package:child_app/widgets/home/home.dart';
+import 'package:child_app/widgets/quizzes/quizzesWidget.dart';
 import 'package:child_app/widgets/todos/todos.dart';
 import 'package:flutter/material.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -28,13 +29,19 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         canvasColor: Colors.white,
         textTheme: ThemeData.dark().textTheme.copyWith(
-            button: const TextStyle(color: Colors.lightBlue),
-        ),
+              button: const TextStyle(color: Colors.lightBlue),
+            ),
       ),
-      initialRoute: '/home',
-      routes: <String, WidgetBuilder> {
-        HomePage.routeName: (BuildContext context) => const HomePage(title: 'Hey there!'),
-        Todos.routeName: (BuildContext context) => const Todos(title: 'Missions'),
+      initialRoute: '/loading',
+      routes: <String, WidgetBuilder>{
+        HomePage.routeName: (BuildContext context) =>
+            const HomePage(title: 'Hey there!'),
+        Todos.routeName: (BuildContext context) =>
+            const Todos(title: 'Missions'),
+        Loading.routeName: (BuildContext context) => Loading(),
+        QuizzesWidget.routeName: (BuildContext context) => QuizzesWidget(
+              title: 'Quizzes',
+            ),
       },
     );
   }
