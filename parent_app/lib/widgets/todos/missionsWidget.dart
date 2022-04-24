@@ -20,31 +20,6 @@ class _MissionsWidgetState extends State<MissionsWidget> {
     "Получитaь призы": ["Получить призы", "\$10", "created"],
   };
 
-  double padValue = 0.0;
-  void _animatePadding() {
-    // setState(() {
-    //   padValue = value;
-    // });
-    setState(() {
-      padValue = 50;
-    });
-    Future.delayed(const Duration(milliseconds: 600), () {
-      setState(() {
-        padValue = 0;
-      });
-      Future.delayed(const Duration(milliseconds: 600), () {
-        setState(() {
-          padValue = 50;
-        });
-        Future.delayed(const Duration(milliseconds: 600), () {
-          setState(() {
-            padValue = 0;
-          });
-        });
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,9 +38,6 @@ class _MissionsWidgetState extends State<MissionsWidget> {
                       borderRadius: BorderRadius.circular(20),
                       child: Dismissible(
                         direction: DismissDirection.horizontal,
-                        onUpdate: (update) {
-                          _animatePadding();
-                        },
                         confirmDismiss: (direction) async {
                           setState(() {
                             missions.remove(missions.keys.elementAt(index));
@@ -121,90 +93,85 @@ class _MissionsWidgetState extends State<MissionsWidget> {
                               tileMode: TileMode.repeated,
                             ),
                           ),
-                          child: AnimatedPadding(
-                            padding: EdgeInsets.only(right: padValue),
-                            duration: const Duration(milliseconds: 5arko00),
-                            curve: Curves.easeOut,
-                            child: Card(
-                                margin: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                color: missions.values
-                                            .elementAt(index)
-                                            .elementAt(2) ==
-                                        "created"
-                                    ? Color(0xFFf2f2f2)
-                                    : missions.values
-                                                .elementAt(index)
-                                                .elementAt(2) ==
-                                            "completed"
-                                        ? (AppColors.completeColor)
-                                        : Color(0xFFf2f2f2),
-                                shadowColor: Colors.transparent,
-                                child: missions.values
-                                            .elementAt(index)
-                                            .elementAt(2) ==
-                                        "created"
-                                    ? (ListTile(
-                                        title: Text(
-                                          missions.keys.elementAt(index),
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: AppColors.grey,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'Inter',
-                                          ),
-                                        ),
-                                        subtitle: Text(
-                                          missions.values
+                          child: Card(
+                              margin: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              color: missions.values
+                                          .elementAt(index)
+                                          .elementAt(2) ==
+                                      "created"
+                                  ? Color(0xFFf2f2f2)
+                                  : missions.values
                                               .elementAt(index)
-                                              .elementAt(0),
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            color: Colors.grey,
-                                          ),
+                                              .elementAt(2) ==
+                                          "completed"
+                                      ? (AppColors.completeColor)
+                                      : Color(0xFFf2f2f2),
+                              shadowColor: Colors.transparent,
+                              child: missions.values
+                                          .elementAt(index)
+                                          .elementAt(2) ==
+                                      "created"
+                                  ? (ListTile(
+                                      title: Text(
+                                        missions.keys.elementAt(index),
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: AppColors.grey,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Inter',
                                         ),
-                                        trailing: Text(
-                                          missions.values
+                                      ),
+                                      subtitle: Text(
+                                        missions.values
+                                            .elementAt(index)
+                                            .elementAt(0),
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      trailing: Text(
+                                        missions.values
+                                            .elementAt(index)
+                                            .elementAt(1),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Inter',
+                                          fontSize: 30,
+                                          color: AppColors.grey,
+                                        ),
+                                      ),
+                                    ))
+                                  : missions.values
                                               .elementAt(index)
-                                              .elementAt(1),
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'Inter',
-                                            fontSize: 30,
-                                            color: AppColors.grey,
-                                          ),
-                                        ),
-                                      ))
-                                    : missions.values
+                                              .elementAt(2) ==
+                                          "completed"
+                                      ? ListTile(
+                                          title: Text(
+                                            missions.values
                                                 .elementAt(index)
-                                                .elementAt(2) ==
-                                            "completed"
-                                        ? ListTile(
-                                            title: Text(
-                                              missions.values
-                                                  .elementAt(index)
-                                                  .elementAt(1),
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: 'Inter',
-                                              ),
+                                                .elementAt(1),
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Inter',
                                             ),
-                                            trailing: Text(
-                                              "Claim",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: 'Inter',
-                                                fontSize: 30,
-                                                color: Colors.white54,
-                                              ),
+                                          ),
+                                          trailing: Text(
+                                            "Claim",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Inter',
+                                              fontSize: 30,
+                                              color: Colors.white54,
                                             ),
-                                          )
-                                        : null),
-                          ),
+                                          ),
+                                        )
+                                      : null),
                         ),
                       ),
                     ),
@@ -215,56 +182,6 @@ class _MissionsWidgetState extends State<MissionsWidget> {
           ],
         ),
       ),
-      // body: Container(
-      //   margin: const EdgeInsets.only(top: 10),
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //     children: [
-      //       ClipRRect(
-      //         borderRadius: BorderRadius.circular(16),
-      //         child: Dismissible(
-      //           key: UniqueKey(),
-      //           background: Container(
-      //             decoration: ShapeDecoration(
-      //               color: Colors.red,
-      //               shape: RoundedRectangleBorder(
-      //                   borderRadius: BorderRadius.circular(16)),
-      //             ),
-      //           ),
-      //           secondaryBackground: Container(
-      //             decoration: ShapeDecoration(
-      //               color: Colors.green,
-      //               shape: RoundedRectangleBorder(
-      //                   borderRadius: BorderRadius.circular(16)),
-      //             ),
-      //           ),
-      //           child: Container(
-      //             decoration: const BoxDecoration(
-      //               gradient: LinearGradient(
-      //                 begin: Alignment.centerLeft,
-      //                 end: Alignment.centerRight,
-      //                 colors: <Color>[
-      //                   Colors.red,
-      //                   Colors.green
-      //                 ], // red to yellow
-      //                 tileMode: TileMode.repeated,
-      //               ),
-      //             ),
-      //             child: Card(
-      //               margin: EdgeInsets.zero,
-      //               shape: RoundedRectangleBorder(
-      //                   borderRadius: BorderRadius.circular(16)),
-      //               child: const Padding(
-      //                 padding: EdgeInsets.all(8),
-      //                 child: Text('Hello, world!'),
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
