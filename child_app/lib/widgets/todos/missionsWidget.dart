@@ -25,53 +25,69 @@ class _MissionsWidgetState extends State<MissionsWidget> {
                     padding: EdgeInsets.zero,
                     itemCount: missions.length,
                     itemBuilder: (context, index) {
-                      return Dismissible(
-                          direction: DismissDirection.endToStart,
-                          confirmDismiss: (direction) async {
-                            await http.patch(
-                              Uri.parse(LoadingState.apiUrl +
-                                  "/mission/${missions[index].id}/complete"),
-                            );
-                            print("Mission ${missions[index].id} completed");
-                            setState(() {
-                              missions.removeAt(index);
-                            });
-                            return false;
-                          },
-                          background: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            color: AppColors.completeColor,
-                            child: Align(
-                              child: Padding(
-                                padding: const EdgeInsets.only(right: 16),
-                                child: Icon(
-                                  Icons.check_rounded,
-                                  color: Colors.white54,
-                                  size: 35,
-                                ),
-                              ),
-                              alignment: Alignment.centerRight,
-                            ),
-                          ),
-                          key: Key(index.toString()),
-                          child: Card(
+                      return Padding(
+                        padding: EdgeInsets.all(10),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Dismissible(
+                            direction: DismissDirection.endToStart,
+                            confirmDismiss: (direction) async {
+                              await http.patch(
+                                Uri.parse(LoadingState.apiUrl +
+                                    "/mission/${missions[index].id}/complete"),
+                              );
+                              print("Mission ${missions[index].id} completed");
+                              setState(() {
+                                missions.removeAt(index);
+                              });
+                              return false;
+                            },
+                            background: Card(
+                              margin: EdgeInsets.zero,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
-                              margin: EdgeInsets.only(
-                                  top: 10, bottom: 0, left: 20, right: 20),
-                              color:
-                                  missions.elementAt(index).state == "created"
+                              color: AppColors.completeColor,
+                              child: Align(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 20),
+                                  child: Icon(
+                                    Icons.check_rounded,
+                                    color: Colors.white54,
+                                    size: 35,
+                                  ),
+                                ),
+                                alignment: Alignment.centerRight,
+                              ),
+                            ),
+                            key: Key(index.toString()),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: <Color>[
+                                    AppColors.completeColor,
+                                    AppColors.completeColor
+                                  ], // red to yellow
+                                  tileMode: TileMode.repeated,
+                                ),
+                              ),
+                              child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  margin: EdgeInsets.zero,
+                                  color: missions.elementAt(index).state ==
+                                          "created"
                                       ? Color(0xFFf2f2f2)
                                       : missions.elementAt(index).state ==
                                               "completed"
                                           ? (AppColors.completeColor)
                                           : Color(0xFFf2f2f2),
-                              shadowColor: Colors.transparent,
-                              child:
-                                  missions.elementAt(index).state == "created"
+                                  shadowColor: Colors.transparent,
+                                  child: missions.elementAt(index).state ==
+                                          "created"
                                       ? (ListTile(
                                           title: Text(
                                             missions.elementAt(index).text,
@@ -127,7 +143,11 @@ class _MissionsWidgetState extends State<MissionsWidget> {
                                                 ),
                                               ),
                                             )
-                                          : null));
+                                          : null),
+                            ),
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),
