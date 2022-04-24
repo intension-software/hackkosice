@@ -83,9 +83,14 @@ class _QuizzesWidgetState extends State<QuizzesWidget> {
                                           ),
                                         ),
                                   child: 
-                                  const Padding(padding: EdgeInsets.all(10),
+                                  const Padding(padding: EdgeInsets.only(top: 10,bottom: 10),
                                   child: Text(
                                     "Daily Quiz",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                   ),
                                   ),
                                   // child: ListTile(
