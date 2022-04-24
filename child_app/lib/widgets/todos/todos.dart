@@ -58,8 +58,11 @@ class _TodosState extends State<Todos> {
           body: TabBarView(
             children: [
               MissionsWidget(),
-              Center(
-                child: Text('Tab 2'),
+              Align(
+                alignment: Alignment.topCenter,
+                  child: Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Text('No history yet'),)
               ),
             ],
           ),

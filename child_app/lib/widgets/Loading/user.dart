@@ -5,7 +5,7 @@ class User {
   final String name;
   final String email;
   final int toClaim;
-  final double balance;
+  double balance;
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
