@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import '../Loading/Loading.dart';
+import 'package:http/http.dart' as http;
 import '../../util/AppColors.dart';
 
 class MissionsWidget extends StatefulWidget {
@@ -11,14 +12,7 @@ class MissionsWidget extends StatefulWidget {
 
 class _MissionsWidgetState extends State<MissionsWidget> {
   int _counter = 10;
-  var missions = <String, List<String>>{
-    "Получить призы": ["Получить призы", "\$10", "created"],
-    "Получить при": ["Получить призы", "\$2", "created"],
-    "Получить sпризы": ["Получить призы", "\$10", "created"],
-    "a призы": ["Получить призы", "\$10", "created"],
-    "Получитьs призы": ["Получить призы", "\$10", "created"],
-    "Получитaь призы": ["Получить призы", "\$10", "created"],
-  };
+  var missions = LoadingState.missions;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +34,7 @@ class _MissionsWidgetState extends State<MissionsWidget> {
                         direction: DismissDirection.horizontal,
                         confirmDismiss: (direction) async {
                           setState(() {
-                            missions.remove(missions.keys.elementAt(index));
+                            missions.removeAt(index);
                           });
                           return false;
                         },
@@ -98,25 +92,19 @@ class _MissionsWidgetState extends State<MissionsWidget> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
-                              color: missions.values
-                                          .elementAt(index)
-                                          .elementAt(2) ==
+                              color: missions.elementAt(index).state ==
                                       "created"
                                   ? Color(0xFFf2f2f2)
-                                  : missions.values
-                                              .elementAt(index)
-                                              .elementAt(2) ==
+                                  : missions.elementAt(index).state ==
                                           "completed"
                                       ? (AppColors.completeColor)
                                       : Color(0xFFf2f2f2),
                               shadowColor: Colors.transparent,
-                              child: missions.values
-                                          .elementAt(index)
-                                          .elementAt(2) ==
+                              child: missions.elementAt(index).state ==
                                       "created"
                                   ? (ListTile(
                                       title: Text(
-                                        missions.keys.elementAt(index),
+                                        missions.elementAt(index).text,
                                         style: TextStyle(
                                           fontSize: 20,
                                           color: AppColors.grey,
@@ -125,18 +113,20 @@ class _MissionsWidgetState extends State<MissionsWidget> {
                                         ),
                                       ),
                                       subtitle: Text(
-                                        missions.values
-                                            .elementAt(index)
-                                            .elementAt(0),
+                                        missions.elementAt(index).due,
                                         style: TextStyle(
                                           fontSize: 15,
                                           color: Colors.grey,
                                         ),
                                       ),
                                       trailing: Text(
-                                        missions.values
+                                        missions
                                             .elementAt(index)
-                                            .elementAt(1),
+                                            .reward
+                                            .values
+                                            .elementAt(1)
+                                            .toString() +
+                                        "\$",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontFamily: 'Inter',
@@ -145,15 +135,11 @@ class _MissionsWidgetState extends State<MissionsWidget> {
                                         ),
                                       ),
                                     ))
-                                  : missions.values
-                                              .elementAt(index)
-                                              .elementAt(2) ==
+                                  : missions.elementAt(index).state ==
                                           "completed"
                                       ? ListTile(
                                           title: Text(
-                                            missions.values
-                                                .elementAt(index)
-                                                .elementAt(1),
+                                            missions.elementAt(index).text,
                                             style: TextStyle(
                                               fontSize: 20,
                                               color: Colors.white,
