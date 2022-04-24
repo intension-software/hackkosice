@@ -16,7 +16,7 @@ class Loading extends StatefulWidget {
 }
 
 class LoadingState extends State<Loading> {
-  static const String apiUrl = "http://192.168.185.38:5000/api/v1";
+  static const String apiUrl = "http://10.0.4.164:5000/api/v1";
   bool finished = false;
   static late User user;
   static late List<Mission> missions = [];

@@ -26,7 +26,7 @@ class _MoneyWidgetState extends State<MoneyWidget> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -53,18 +53,26 @@ class _MoneyWidgetState extends State<MoneyWidget> {
                     );
                   },
                 )),
-            SizedBox(height: 20),
-            Padding(
+            SizedBox(height: 10),
+            Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xff8F00FF), Color(0xff458FFF)
+                  ],
+                  begin: const FractionalOffset(0.0, 0.0),
+                  end: const FractionalOffset(1.0, 0.0),
+                  stops: [0.0, 1.0],
+                  tileMode: TileMode.clamp,
+                ),
+              ),
+                child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    minimumSize: Size.fromHeight(40),
-                    backgroundColor: AppColors.blue,
-                  ),
+
 
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +92,7 @@ class _MoneyWidgetState extends State<MoneyWidget> {
                       ),
                     );
                   },
-                )),
+                ))),
           ],
         ),
       ),
@@ -108,7 +116,7 @@ Widget BalanceCard(String balance) {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Row(children: [Image.asset("assets/money.png", width: 30, height: 30,),
+          Row(children: [
             SizedBox(width: 5),
             Text(balance,
             style: TextStyle(
@@ -122,12 +130,16 @@ Widget BalanceCard(String balance) {
           SizedBox(height: 15),
           TextButton(
             style: TextButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
                 backgroundColor: AppColors.blue,
                 minimumSize: Size.fromHeight(40),
             ),
             onPressed: () {},
             child: Text("Request Money",
               style: TextStyle(
+
                   color: Colors.white,
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold),
