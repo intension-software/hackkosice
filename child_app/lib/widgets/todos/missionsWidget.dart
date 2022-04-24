@@ -17,7 +17,6 @@ class _MissionsWidgetState extends State<MissionsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            margin: EdgeInsets.only(top: 10),
             child: Column(
               children: <Widget>[
                 Expanded(

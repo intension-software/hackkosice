@@ -17,6 +17,11 @@ class QuizzesWidget extends StatefulWidget {
 class _QuizzesWidgetState extends State<QuizzesWidget> {
   bool solvingQuiz = false;
 
+  void endQuiz() {
+    setState(() {
+      solvingQuiz = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +110,15 @@ class _QuizzesWidgetState extends State<QuizzesWidget> {
                       color: AppColors.grey
                   ),
                   ))),
+                  Container(
+                    margin: EdgeInsets.only(top: 50),
+                    child:
+                      Image.asset("assets/roadmap.png",
+                        opacity: AlwaysStoppedAnimation<double>(0.5),
+                      ),
+                  )
                 ]
-                  ) : QuizWidget()
+                  ) : QuizWidget(callback: endQuiz)
     );
   }
 }

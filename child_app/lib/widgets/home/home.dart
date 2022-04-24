@@ -33,10 +33,10 @@ class _HomePageState extends State<HomePage> {
               tabs: [
                 Tab(child: Container(
                     margin: EdgeInsets.all(5),
-                    child: Image.asset("assets/money_emoji.png", ))),
+                    child: Text('Money', style: TextStyle(fontSize: 20)))),
                 Tab(child: Container(
                     margin: EdgeInsets.all(5),
-                    child: Image.asset("assets/piggy_bank_page.png", ))),
+                    child: Text('Piggy Bank', style: TextStyle(fontSize: 20)))),
               ],
             ),
             title: Text(widget.title,

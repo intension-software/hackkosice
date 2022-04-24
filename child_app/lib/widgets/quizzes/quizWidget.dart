@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class QuizWidget extends StatefulWidget {
-  QuizWidget({Key? key}) : super(key: key);
+  const QuizWidget({Key? key, required this.callback}) : super(key: key);
+
+  final callback;
   @override
   _QuizWidgetState createState() => _QuizWidgetState();
 }
@@ -10,6 +12,7 @@ class QuizWidget extends StatefulWidget {
 // Description: This class is the state of the quiz widget.
 class _QuizWidgetState extends State<QuizWidget> {
   int questionNumber = 0;
+  var answer = null;
 
   var quizzes = <String, List<String>>{
     "Koľko stojí chlieb?": ["10Ŧ", "1,35€", "0,99€", "0,63€"],
@@ -20,6 +23,15 @@ class _QuizWidgetState extends State<QuizWidget> {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xff8F00FF), Color(0xff458FFF)
+              ],
+              begin: const FractionalOffset(0.0, 0.0),
+              end: const FractionalOffset(1.0, 0.0),
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp,
+            ),
           borderRadius: BorderRadius.circular(20),
           color: Colors.grey,
 
@@ -28,7 +40,7 @@ class _QuizWidgetState extends State<QuizWidget> {
 
         child: Column(children: [
           Padding(
-              padding: EdgeInsets.only(left: 16, top: 8),
+              padding: EdgeInsets.only(left: 25, top: 50),
               child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text("Question: " + (questionNumber + 1).toString(),
@@ -39,11 +51,11 @@ class _QuizWidgetState extends State<QuizWidget> {
               itemBuilder: (context, index) {
                 return Column(children: [
                   Padding(
-                      padding: EdgeInsets.only(left: 16, top: 8),
+                      padding: EdgeInsets.only(left: 25, bottom: 50),
                       child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(quizzes.keys.elementAt(questionNumber),
-                            style: TextStyle(color: Colors.white, fontSize: 25),
+                            style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
                             ))),
                   ListView.builder(
                       shrinkWrap: true,
@@ -55,10 +67,12 @@ class _QuizWidgetState extends State<QuizWidget> {
                             value: quizzes.values
                                 .elementAt(questionNumber)
                                 .elementAt(jndex),
-                            groupValue: false,
+                            groupValue: answer,
                             fillColor: MaterialStateProperty.all(Colors.white),
                             onChanged: (value) {
-                              setState(() {});
+                              setState(() {
+                                answer = value;
+                              });
                             },
                           ),
                           title: Text(
@@ -75,17 +89,25 @@ class _QuizWidgetState extends State<QuizWidget> {
                       alignment: Alignment.bottomRight,
                       child: TextButton(
                         style: TextButton.styleFrom(
-                           backgroundColor: Colors.white,),
+                           backgroundColor: Colors.white,
+                          ),
                         child:
                         Container(
                           width: 50,
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Next"), Icon(Icons.arrow_forward_ios, color: Colors.black, size: 12 )])),
+                              Text("Next", style: TextStyle(color: Colors.black),), Icon(Icons.arrow_forward_ios, color: Colors.black, size: 12 )])),
                         onPressed: () {
                           setState(() {
-                            questionNumber++;
+                            if (answer != null){
+                              answer = null;
+                              if (questionNumber < quizzes.keys.length - 1) {
+                                questionNumber++;
+                              } else {
+                                widget.callback();
+                                questionNumber = 0;
+                              }}
                           });
                         },
                       ))))
